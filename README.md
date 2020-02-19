@@ -6,5 +6,6 @@ A Blazor version of the [React](https://reactjs.org/tutorial/tutorial.html) [tut
 
 - [React Tic-Tac-Toe Tutorial](https://reactjs.org/tutorial/tutorial.html)
 - [React Tic-Tac-Toe Tutorial (Completed)](https://codepen.io/gaearon/pen/gWWZgR?editors=0010)
+- [Blazor - Get Started](https://docs.microsoft.com/en-us/aspnet/core/blazor/get-started?view=aspnetcore-3.1&tabs=visual-studio-code)
 - [Blazor Component Communication](https://chrissainty.com/3-ways-to-communicate-between-components-in-blazor/)
 - [Razor loop counter quirk](https://github.com/dotnet/aspnetcore/issues/16809#issuecomment-549484265)
