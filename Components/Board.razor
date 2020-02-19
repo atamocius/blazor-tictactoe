@@ -1,7 +1,7 @@
 @{
     Func<int, object> renderSquare = i =>
     {
-        <Square Value="@Squares[i].ToString()" OnClick="() => OnClick.InvokeAsync(i)"/>
+        <Square Value="@Squares[i].ToString()" OnClick="() => OnClick.InvokeAsync(i)"/>;
 
         return null;
     };
