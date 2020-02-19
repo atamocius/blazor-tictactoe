@@ -1,6 +1,6 @@
 # Blazor Tic-Tac-Toe
 
-A Blazor version of the [React](https://reactjs.org/tutorial/tutorial.html) [tutorial](https://codepen.io/gaearon/pen/gWWZgR?editors=0010). Implemented as _faithful_ to the original tutorial.
+A Blazor version of the [React](https://reactjs.org/tutorial/tutorial.html) [tutorial](https://codepen.io/gaearon/pen/gWWZgR?editors=0010). Implemented as _faithful_ to the original tutorial as possible.
 
 ## References
 
