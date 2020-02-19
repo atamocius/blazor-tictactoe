@@ -1,0 +1,34 @@
+@{
+    Func<int, object> renderSquare = i =>
+    {
+        <Square Value="@Squares[i].ToString()" OnClick="() => OnClick.InvokeAsync(i)"/>
+
+        return null;
+    };
+}
+
+<div>
+    <div class="board-row">
+        @renderSquare(0)
+        @renderSquare(1)
+        @renderSquare(2)
+    </div>
+    <div class="board-row">
+        @renderSquare(3)
+        @renderSquare(4)
+        @renderSquare(5)
+    </div>
+    <div class="board-row">
+        @renderSquare(6)
+        @renderSquare(7)
+        @renderSquare(8)
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public IReadOnlyList<char> Squares { get; set; }
+
+    [Parameter]
+    public EventCallback<int> OnClick { get; set; }
+}

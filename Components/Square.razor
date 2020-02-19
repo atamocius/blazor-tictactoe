@@ -1,0 +1,11 @@
+<button class="square" @onclick="OnClick">
+    @Value
+</button>
+
+@code {
+    [Parameter]
+    public string Value { get; set; }
+
+    [Parameter]
+    public Action OnClick { get; set; }
+}

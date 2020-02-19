@@ -1,0 +1,112 @@
+@{
+    var current = this.history[this.stepNumber];
+    var winner = CalculateWinner(current.Squares);
+    var status = winner != NULL_CHAR
+        ? $"Winner: {winner}"
+        : $"Next player: {(this.xIsNext ? 'X' : 'O')}";
+
+    Func<object> moves = () =>
+    {
+        for (int i = 0; i < this.history.Count; i++)
+        {
+            // Due to a Razor loop quirk, the counter needs to be "captured"
+            // https://github.com/dotnet/aspnetcore/issues/16809#issuecomment-549484265
+            var move = i;
+
+            var desc = move == 0
+                ? "Go to game start"
+                : $"Go to move #{move}";
+
+            Action jump = () => this.JumpTo(move);
+
+            <li>
+                <button @onclick="jump">@desc</button>
+            </li>
+        }
+
+        return null;
+    };
+}
+
+<div class="game">
+    <div class="game-board">
+        <Board Squares="current.Squares" OnClick="HandleClick" />
+    </div>
+    <div class="game-info">
+        <div>@status</div>
+        <ol>@moves()</ol>
+    </div>
+</div>
+
+@code {
+    private const char NULL_CHAR = '\0';
+
+    private IReadOnlyList<Frame> history = new []
+    {
+        new Frame(),
+    };
+    private int stepNumber = 0;
+    private bool xIsNext = true;
+
+    private void HandleClick(int i)
+    {
+        var historyCopy = this.history.Take(this.stepNumber + 1);
+        var current = historyCopy.Last();
+        var squares = current.Squares.ToArray();
+
+        if (CalculateWinner(squares) != NULL_CHAR || squares[i] != NULL_CHAR)
+        {
+            return;
+        }
+
+        squares[i] = this.xIsNext ? 'X' : 'O';
+
+        this.history = historyCopy.Append(new Frame(squares)).ToArray();
+        this.stepNumber = historyCopy.Count();
+        this.xIsNext = !this.xIsNext;
+    }
+
+    private void JumpTo(int step)
+    {
+        this.stepNumber = step;
+        this.xIsNext = step % 2 == 0;
+    }
+
+    private static char CalculateWinner(IReadOnlyList<char> squares)
+    {
+        var lines = new []
+        {
+            ( 0, 1, 2 ),
+            ( 3, 4, 5 ),
+            ( 6, 7, 8 ),
+            ( 0, 3, 6 ),
+            ( 1, 4, 7 ),
+            ( 2, 5, 8 ),
+            ( 0, 4, 8 ),
+            ( 2, 4, 6 ),
+        };
+
+        for (int i = 0; i < lines.Length; i++)
+        {
+            var (a, b, c) = lines[i];
+
+            if (squares[a] != NULL_CHAR &&
+                squares[a] == squares[b] &&
+                squares[a] == squares[c])
+            {
+                return squares[a];
+            }
+        }
+
+        return NULL_CHAR;
+    }
+
+    private class Frame
+    {
+        private char[] squares;
+        public IReadOnlyList<char> Squares => this.squares;
+
+        public Frame() => this.squares = new char[9];
+        public Frame(char[] squares) => this.squares = squares;
+    }
+}
