@@ -2,6 +2,10 @@
 
 A Blazor version of the [React](https://reactjs.org/tutorial/tutorial.html) [tutorial](https://codepen.io/gaearon/pen/gWWZgR?editors=0010). Implemented as _faithful_ to the original tutorial as possible.
 
+## Blog Post
+
+[First Impressions: Blazor WebAssembly](https://www.antonmata.me/2020-02-20-first-impressions-blazor-webassembly/)
+
 ## References
 
 - [React Tic-Tac-Toe Tutorial](https://reactjs.org/tutorial/tutorial.html)
