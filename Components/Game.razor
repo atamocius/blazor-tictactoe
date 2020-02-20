@@ -41,12 +41,19 @@
 @code {
     private const char NULL_CHAR = default;
 
-    private IReadOnlyList<Frame> history = new []
+    private IReadOnlyList<Frame> history;
+    private int stepNumber;
+    private bool xIsNext;
+
+    protected override void OnInitialized()
     {
-        new Frame(),
-    };
-    private int stepNumber = 0;
-    private bool xIsNext = true;
+        this.history = new []
+        {
+            new Frame(),
+        };
+        this.stepNumber = 0;
+        this.xIsNext = true;
+    }
 
     private void HandleClick(int i)
     {
